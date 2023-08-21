@@ -1,0 +1,25 @@
+{
+  "name": "auth",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "chatgpt-life",
+  "workspaceFolder": "/chatgpt-life",
+  "extensions": [
+	"dbaeumer.vscode-eslint",
+	"esbenp.prettier-vscode",
+	"streetsidesoftware.code-spell-checker",
+	"Arjun.swagger-viewer",
+	"redhat.vscode-yaml",
+	"njpwerner.autodocstring",
+	"Gruntfuggly.todo-tree",
+	"batisteo.vscode-django",
+	"firsttris.vscode-jest-runner",
+	"ms-azuretools.vscode-docker",
+	"zxh404.vscode-proto3",
+	"hediet.vscode-drawio",
+	"GitHub.copilot",
+	"ms-python.python",
+],
+  "shutdownAction": "none"
+}

@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  chatgpt-life:
+    container_name: ${PROJECT_NAME}-chatgpt-life
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+      args:
+        USER_ID: 1100
+        GROUP_ID: 1100
+      target: dev
+    command: bash -c "while true; do sleep 30; done"
+    restart: always
+    volumes:
+      - type: volume
+        source: chatgpt-life
+        target: /chatgpt-life
+      - type: bind
+        source: ${PWD}
+        target: /chatgpt-life
+    networks:
+      - chatgpt-life-net
+    env_file:
+      - .env
+  postgres:
+    container_name: ${PROJECT_NAME}-postgres
+    image: postgres:15.3
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    networks:
+      - ${PROJECT_NAME}-net
+    volumes:
+      - postgres-chatgpt-life:/var/lib/postgresql/data
+
+  adminer:
+    container_name: ${PROJECT_NAME}-adminer
+    image: adminer
+    restart: always
+    ports:
+      - 5433:8080
+    networks:
+      - ${PROJECT_NAME}-net
+
+networks:
+  chatgpt-life-net:
+    driver: bridge
+volumes:
+  chatgpt-life:
+    driver: local
+  postgres-chatgpt-life:
+    driver: local
